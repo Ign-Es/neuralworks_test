@@ -23,7 +23,9 @@ El modelo se selecciona en base a su 'accuracy' obtenida al momento de predecir 
 
 ### 5. Serializa el mejor modelo seleccionado e implementa una API REST para poder predecir atrasos de nuevos vuelos.
 Modelo serializado y guardado en carpeta 'models' con nombre 'best_model.pkl'.
-El codigo que implementa la API se encuentra en la carpeta 'scripts' con nombre 'get_api.py'.
+El codigo que implementa la API se encuentra en 'scripts/get_api.py'. Un ejemplo de como solicitar predicciones a la API se encuentra en 'scripts/test_api.py'.
+La respuestas de la API es en el formato: [Probabilidad_de_atraso, Probabilidad_de_no_atraso].
+
 
 ### 6. Automatiza el proceso de build y deploy de la API, utilizando uno o varios servicios cloud. Argumenta tu decisión sobre los servicios utilizados.
 Utilizo Cloud Build y Cloud Run de Google Cloud Platform. Estos servicios permiten el uso de contenedores docker, facilitando el despliegue de la API, además de que entregan un servicio de CI/CD  que puede ser personalizado posteriormente y automatizar el proceso de build y deploy en base a triggers.
