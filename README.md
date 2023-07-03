@@ -29,7 +29,9 @@ La respuestas de la API es en el formato: [Probabilidad_de_atraso, Probabilidad_
 
 ### 6. Automatiza el proceso de build y deploy de la API, utilizando uno o varios servicios cloud. Argumenta tu decisión sobre los servicios utilizados.
 Utilizó Cloud Build y Cloud Run de Google Cloud Platform. Estos servicios permiten el uso de contenedores docker, facilitando el despliegue de la API, además de que entregan un servicio de CI/CD  que puede ser personalizado posteriormente, automatizando el proceso de build y deploy en base a triggers, como realizar un push a la rama principal del repositorio.
-El código que controla este proceso se encuentra en 'cloudbuild.yaml'.
+
+El código que controla este proceso se encuentra en 'cloudbuild.yaml'. Se agrega un dockerfile con las instrucciones para crear una imagen docker. Se sube el repositorio a Google Cloud Repositories(GCR) y Cloud Build se encarga de crear la imagen docker cuando se recibe un push a la rama principal del repositorio en GCR. La imagen creada se guarda en la nube y posteriormente se ejecuta con Cloud Run.
+
 
 ### 7. Realiza pruebas de estrés a la API con el modelo expuesto con al menos 50.000 requests durante 45 segundos. Para esto debes utilizar esta herramienta y presentar las métricas obtenidas. ¿Cómo podrías mejorar la performance de las pruebas anteriores?
 Las pruebas podrían llevarse a cabo con Apache JMeter, pero lamentablemente no se pudieron realizar debido a falta de tiempo. En general se espera que los resultados de estas pruebas se puedan mejorar al hacer que el deployment de la API sea escalable automáticamente para responder a alta demanda.
