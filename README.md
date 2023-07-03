@@ -23,13 +23,37 @@ El modelo se selecciona en base a su 'accuracy' obtenida al momento de predecir 
 
 ### 5. Serializa el mejor modelo seleccionado e implementa una API REST para poder predecir atrasos de nuevos vuelos.
 Modelo serializado y guardado en carpeta 'models' con nombre 'best_model.pkl'.
-El codigo que implementa la API se encuentra en 'scripts/get_api.py'. Un ejemplo de como solicitar predicciones a la API se encuentra en 'scripts/test_api.py'.
+El código que implementa la API se encuentra en 'scripts/get_api.py'. Un ejemplo de cómo solicitar predicciones a la API se encuentra en 'scripts/test_api.py'.
 La respuestas de la API es en el formato: [Probabilidad_de_atraso, Probabilidad_de_no_atraso].
 
 
 ### 6. Automatiza el proceso de build y deploy de la API, utilizando uno o varios servicios cloud. Argumenta tu decisión sobre los servicios utilizados.
-Utilizo Cloud Build y Cloud Run de Google Cloud Platform. Estos servicios permiten el uso de contenedores docker, facilitando el despliegue de la API, además de que entregan un servicio de CI/CD  que puede ser personalizado posteriormente y automatizar el proceso de build y deploy en base a triggers.
-El codigo que controla este proceso se encuentra en 'cloudbuiild.yaml'.
+Utilizó Cloud Build y Cloud Run de Google Cloud Platform. Estos servicios permiten el uso de contenedores docker, facilitando el despliegue de la API, además de que entregan un servicio de CI/CD  que puede ser personalizado posteriormente, automatizando el proceso de build y deploy en base a triggers, como realizar un push a la rama principal del repositorio.
+El código que controla este proceso se encuentra en 'cloudbuild.yaml'.
 
 ### 7. Realiza pruebas de estrés a la API con el modelo expuesto con al menos 50.000 requests durante 45 segundos. Para esto debes utilizar esta herramienta y presentar las métricas obtenidas. ¿Cómo podrías mejorar la performance de las pruebas anteriores?
-Las pruebas se realizan con Apache JMeter. Los resultados de estas pruebas se pueden mejorar al hacer que el deployment de la API sea escalable automáticamente.
+Las pruebas podrían llevarse a cabo con Apache JMeter, pero lamentablemente no se pudieron realizar debido a falta de tiempo. En general se espera que los resultados de estas pruebas se puedan mejorar al hacer que el deployment de la API sea escalable automáticamente para responder a alta demanda.
+
+## Cómo comprobar el funcionamiento de la API localmente
+Clone el repositorio localmente e instale requerimientos en un ambiente virtual.
+```bash
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+Ejecute la API.
+```bash
+python scripts/get_api.py
+```
+
+Luego para probar el funcionamiento puede ejecutar 'scripts/test_api'. Abra otro terminal y ejecute el código.
+```bash
+python scripts/test_api.py
+```
+
+La respuesta obtenida debiese ser:
+```bash
+[[0.6522672097479137, 0.34773279025208653]]
+```
+Correspondiendo a [Probabilidad_de_atraso, Probabildiad_de_no_atraso].
